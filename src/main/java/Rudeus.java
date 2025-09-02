@@ -12,30 +12,24 @@ public class Rudeus {
     }
 
     // Method to automatically print messages with borders
-    private static void printMessageWithBorders(String message, boolean hasIndents) {
+    private static void printMessageWithBorders(String message) {
         String border = "──────────────────────────────────────────────────────────────────────────";
-        if (hasIndents) {
             printWithIndents(border);
             printWithIndents(message);
             printWithIndents(border);
-        } else {
-            System.out.println(border);
-            System.out.println(message);
-            System.out.println(border);
-        }
     }
 
     // Method to add a task to the task list
     private static void addTask(String description) {
         taskList[taskCount] = new Task(description);
         taskCount++;
-        printMessageWithBorders("added: " + description, true);
+        printMessageWithBorders("added: " + description);
     }
 
     // Method to print the task list
     private static void printTaskList() {
         if (taskCount == 0) {
-            printMessageWithBorders("No tasks available.", true);
+            printMessageWithBorders("No tasks available.");
             return;
         }
         StringBuilder taskListMessage = new StringBuilder("Here are the tasks in your list:\n");
@@ -47,21 +41,21 @@ public class Rudeus {
                     .append(taskList[i].toString())
                     .append("\n");
         }
-        printMessageWithBorders(taskListMessage.toString().trim(), true);
+        printMessageWithBorders(taskListMessage.toString().trim());
     }
 
     private static void markTask(int index, boolean isMark) {
         String extraIndent = " ".repeat(MAX_INDENT_LEVEL + 2); // 6 spaces per indent level
         if (index < 0 || index >= taskCount) {
-            printMessageWithBorders("Invalid task number.", true);
+            printMessageWithBorders("Invalid task number.");
             return;
         }
         if (isMark) {
             taskList[index].setIsDone(true);
-            printMessageWithBorders("Nice! I've marked this task as done:\n" + extraIndent + taskList[index], true);
+            printMessageWithBorders("Nice! I've marked this task as done:\n" + extraIndent + taskList[index]);
         } else {
             taskList[index].setIsDone(false);
-            printMessageWithBorders("OK, I've marked this task as not done yet:\n" + extraIndent + taskList[index], true);
+            printMessageWithBorders("OK, I've marked this task as not done yet:\n" + extraIndent + taskList[index]);
         }
     }
 
@@ -80,20 +74,20 @@ public class Rudeus {
                     int idx = Integer.parseInt(userInput.substring(5).trim()) - 1; // Convert to zero-based index ()
                     markTask(idx, true);
                 } catch (NumberFormatException e) { // Handle invalid number format
-                    printMessageWithBorders("Please provide a valid task number to mark.", true);
+                    printMessageWithBorders("Please provide a valid task number to mark.");
                 }
             } else if (userInput.startsWith("unmark ")) {
                 try {
                     int idx = Integer.parseInt(userInput.substring(7).trim()) - 1; // Convert to zero-based index ()
                     markTask(idx, false);
                 } catch (NumberFormatException e) { // Handle invalid number format
-                    printMessageWithBorders("Please provide a valid task number to unmark.", true);
+                    printMessageWithBorders("Please provide a valid task number to unmark.");
                 }
             } else {
                 addTask(userInput);
             }
         } while (true);
-        printMessageWithBorders("See you around! Don’t get into too much trouble without me!", true);
+        printMessageWithBorders("See you around! Don’t get into too much trouble without me!");
         scanner.close();
     }
 
