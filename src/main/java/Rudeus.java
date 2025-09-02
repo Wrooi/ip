@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Rudeus {
     private static final int MAX_INDENT_LEVEL = 4; // Maximum indent level
+    private static final Task[] taskList = new Task[100]; // Array to store tasks
+    private static int taskCount = 0; // Counter for tasks
 
     // Method to automatically print with indents
     private static void printWithIndents(String message) {
@@ -23,6 +25,28 @@ public class Rudeus {
         }
     }
 
+    // Method to add a task to the task list
+    private static void addTask(String description) {
+        taskList[taskCount] = new Task(description);
+        taskCount++;
+        printMessageWithBorders("added: " + description, true);
+    }
+
+    // Method to print the task list
+    private static void printTaskList() {
+        if (taskCount == 0) {
+            printMessageWithBorders("No tasks available.", true);
+            return;
+        }
+        StringBuilder taskListMessage = new StringBuilder("Here are the tasks in your list:\n");
+        String indent = " ".repeat(MAX_INDENT_LEVEL); // 4 spaces per indent level
+        for (int i = 0; i < taskCount; i++) {
+            taskListMessage.append(indent);
+            taskListMessage.append((i + 1)).append(". ").append(taskList[i].getDescription()).append("\n");
+        }
+        printMessageWithBorders(taskListMessage.toString().trim(), true);
+    }
+
     // Method to read and process user input
     public static void readAndProcessUserInput() {
         Scanner scanner = new Scanner(System.in);
@@ -31,8 +55,11 @@ public class Rudeus {
             userInput = scanner.nextLine().trim();
             if (userInput.equalsIgnoreCase("bye")) {
                 break;
+            } else if (userInput.equalsIgnoreCase("list")) {
+                printTaskList();
+            } else {
+                addTask(userInput);
             }
-            printMessageWithBorders(userInput, true);
         } while (true);
         printMessageWithBorders("See you around! Don’t get into too much trouble without me!", true);
         scanner.close();
@@ -41,7 +68,7 @@ public class Rudeus {
     // Method to print greeting message
     private static void printGreetingMessage() {
         String logo =
-                        "┌──────────────────────────────────────────────────────────────────────┐\n" +
+                "┌──────────────────────────────────────────────────────────────────────┐\n" +
                         "│░█████████  ░██     ░██ ░███████   ░██████████ ░██     ░██   ░██████  │\n" +
                         "│░██     ░██ ░██     ░██ ░██   ░██  ░██         ░██     ░██  ░██   ░██ │\n" +
                         "│░██     ░██ ░██     ░██ ░██    ░██ ░██         ░██     ░██ ░██        │\n" +
