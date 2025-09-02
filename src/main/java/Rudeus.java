@@ -23,9 +23,25 @@ public class Rudeus {
         }
     }
 
-    public static void main(String[] args) {
+    // Method to read and process user input
+    public static void readAndProcessUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        String userInput;
+        do {
+            userInput = scanner.nextLine().trim();
+            if (userInput.equalsIgnoreCase("bye")) {
+                break;
+            }
+            printMessageWithBorders(userInput, true);
+        } while (true);
+        printMessageWithBorders("See you around! Don’t get into too much trouble without me!", true);
+        scanner.close();
+    }
+
+    // Method to print greeting message
+    private static void printGreetingMessage() {
         String logo =
-                "┌────────────────────────────────────────────────────────────────────────┐\n" +
+                        "┌────────────────────────────────────────────────────────────────────────┐\n" +
                         "│ ░█████████  ░██     ░██ ░███████   ░██████████ ░██     ░██   ░██████   │\n" +
                         "│ ░██     ░██ ░██     ░██ ░██   ░██  ░██         ░██     ░██  ░██   ░██  │\n" +
                         "│ ░██     ░██ ░██     ░██ ░██    ░██ ░██         ░██     ░██ ░██         │\n" +
@@ -36,18 +52,10 @@ public class Rudeus {
                         "└────────────────────────────────────────────────────────────────────────┘\n";
         System.out.println("Yo! The name's \n" + logo + "At your service, as always. Need some magic—or maybe just a hand? Ask away!\n" +
                 "──────────────────────────────────────────────────────────────────────────");
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        String userInput;
-        do {
-            userInput = scanner.nextLine().trim();
-            if (userInput.equalsIgnoreCase("bye")) {
-                break;
-            }
-            printMessageWithBorders(userInput, true);
-        } while (true);
-        scanner.close();
-
-        printMessageWithBorders("See you around! Don’t get into too much trouble without me!", true);
+    public static void main(String[] args) {
+        printGreetingMessage();
+        readAndProcessUserInput();
     }
 }
