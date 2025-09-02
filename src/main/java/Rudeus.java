@@ -41,10 +41,28 @@ public class Rudeus {
         StringBuilder taskListMessage = new StringBuilder("Here are the tasks in your list:\n");
         String indent = " ".repeat(MAX_INDENT_LEVEL); // 4 spaces per indent level
         for (int i = 0; i < taskCount; i++) {
-            taskListMessage.append(indent);
-            taskListMessage.append((i + 1)).append(". ").append(taskList[i].getDescription()).append("\n");
+            taskListMessage.append(indent)
+                    .append((i + 1))
+                    .append(". ")
+                    .append(taskList[i].toString())
+                    .append("\n");
         }
         printMessageWithBorders(taskListMessage.toString().trim(), true);
+    }
+
+    private static void markTask(int index, boolean isMark) {
+        String extraIndent = " ".repeat(MAX_INDENT_LEVEL + 2); // 6 spaces per indent level
+        if (index < 0 || index >= taskCount) {
+            printMessageWithBorders("Invalid task number.", true);
+            return;
+        }
+        if (isMark) {
+            taskList[index].setIsDone(true);
+            printMessageWithBorders("Nice! I've marked this task as done:\n" + extraIndent + taskList[index], true);
+        } else {
+            taskList[index].setIsDone(false);
+            printMessageWithBorders("OK, I've marked this task as not done yet:\n" + extraIndent + taskList[index], true);
+        }
     }
 
     // Method to read and process user input
@@ -57,6 +75,20 @@ public class Rudeus {
                 break;
             } else if (userInput.equalsIgnoreCase("list")) {
                 printTaskList();
+            } else if (userInput.startsWith("mark ")) {
+                try {
+                    int idx = Integer.parseInt(userInput.substring(5).trim()) - 1; // Convert to zero-based index ()
+                    markTask(idx, true);
+                } catch (NumberFormatException e) { // Handle invalid number format
+                    printMessageWithBorders("Please provide a valid task number to mark.", true);
+                }
+            } else if (userInput.startsWith("unmark ")) {
+                try {
+                    int idx = Integer.parseInt(userInput.substring(7).trim()) - 1; // Convert to zero-based index ()
+                    markTask(idx, false);
+                } catch (NumberFormatException e) { // Handle invalid number format
+                    printMessageWithBorders("Please provide a valid task number to unmark.", true);
+                }
             } else {
                 addTask(userInput);
             }
