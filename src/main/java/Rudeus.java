@@ -1,17 +1,26 @@
 import java.util.Scanner;
 
 public class Rudeus {
-    private static final int MAX_INDENT_LEVEL = 4; // Maximum indent level
-    private static final Task[] taskList = new Task[100]; // Array to store tasks
-    private static int taskCount = 0; // Counter for tasks
+    /** Maximum indent level */
+    private static final int MAX_INDENT_LEVEL = 4;
+    /** Array to store tasks */
+    private static final Task[] taskList = new Task[100];
+    /** Counter for tasks */
+    private static int taskCount = 0;
 
-    // Method to automatically print with indents
+    /**
+     * Automatically prints a message with indents.
+     * @param message The message to print.
+     */
     private static void printWithIndents(String message) {
         String indent = " ".repeat(MAX_INDENT_LEVEL); // 4 spaces per indent level
         System.out.println(indent + message);
     }
 
-    // Method to automatically print messages with borders
+    /**
+     * Automatically prints a message with borders.
+     * @param message The message to print.
+     */
     private static void printMessageWithBorders(String message) {
         String border = "──────────────────────────────────────────────────────────────────────────";
             printWithIndents(border);
@@ -19,14 +28,19 @@ public class Rudeus {
             printWithIndents(border);
     }
 
-    // Method to add a task to the task list
+    /**
+     * Adds a task to the task list.
+     * @param description The description of the task.
+     */
     private static void addTask(String description) {
         taskList[taskCount] = new Task(description);
         taskCount++;
         printMessageWithBorders("added: " + description);
     }
 
-    // Method to print the task list
+    /**
+     * Prints the task list.
+     */
     private static void printTaskList() {
         if (taskCount == 0) {
             printMessageWithBorders("No tasks available.");
@@ -44,6 +58,11 @@ public class Rudeus {
         printMessageWithBorders(taskListMessage.toString().trim());
     }
 
+    /**
+     * Marks or unmarks a task as done.
+     * @param index The index of the task.
+     * @param isMark True to mark as done, false to unmark.
+     */
     private static void markTask(int index, boolean isMark) {
         String extraIndent = " ".repeat(MAX_INDENT_LEVEL + 2); // 6 spaces per indent level
         if (index < 0 || index >= taskCount) {
@@ -59,7 +78,9 @@ public class Rudeus {
         }
     }
 
-    // Method to read and process user input
+    /**
+     * Reads and processes user input.
+     */
     public static void readAndProcessUserInput() {
         Scanner scanner = new Scanner(System.in);
         String userInput;
@@ -91,7 +112,9 @@ public class Rudeus {
         scanner.close();
     }
 
-    // Method to print greeting message
+    /**
+     * Prints the greeting message.
+     */
     private static void printGreetingMessage() {
         String logo =
                 "┌──────────────────────────────────────────────────────────────────────┐\n" +
