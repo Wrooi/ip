@@ -60,21 +60,30 @@ public class Rudeus {
 
     /**
      * Marks or unmarks a task as done.
+     * Notifies if the task is already marked/unmarked.
      * @param index The index of the task.
-     * @param isMark True to mark as done, false to unmark.
+     * @param isDone True to mark as done, false to unmark.
      */
-    private static void markTask(int index, boolean isMark) {
+    private static void markTaskIsDone(int index, boolean isDone) {
         String extraIndent = " ".repeat(MAX_INDENT_LEVEL + 2); // 6 spaces per indent level
         if (index < 0 || index >= taskCount) {
             printMessageWithBorders("Invalid task number.");
             return;
         }
-        if (isMark) {
-            taskList[index].setIsDone(true);
-            printMessageWithBorders("Nice! I've marked this task as done:\n" + extraIndent + taskList[index]);
+        if (isDone) {
+            if (taskList[index].getIsDone()) {
+                printMessageWithBorders("Task is already marked as done:\n" + extraIndent + taskList[index]);
+            } else {
+                taskList[index].setIsDone(true);
+                printMessageWithBorders("Nice! I've marked this task as done:\n" + extraIndent + taskList[index]);
+            }
         } else {
-            taskList[index].setIsDone(false);
-            printMessageWithBorders("OK, I've marked this task as not done yet:\n" + extraIndent + taskList[index]);
+            if (!taskList[index].getIsDone()) {
+                printMessageWithBorders("Task is already not marked as done:\n" + extraIndent + taskList[index]);
+            } else {
+                taskList[index].setIsDone(false);
+                printMessageWithBorders("OK, I've marked this task as not done yet:\n" + extraIndent + taskList[index]);
+            }
         }
     }
 
@@ -93,14 +102,14 @@ public class Rudeus {
             } else if (userInput.startsWith("mark ")) {
                 try {
                     int idx = Integer.parseInt(userInput.substring(5).trim()) - 1; // Convert to zero-based index ()
-                    markTask(idx, true);
+                    markTaskIsDone(idx, true);
                 } catch (NumberFormatException e) { // Handle invalid number format
                     printMessageWithBorders("Please provide a valid task number to mark.");
                 }
             } else if (userInput.startsWith("unmark ")) {
                 try {
                     int idx = Integer.parseInt(userInput.substring(7).trim()) - 1; // Convert to zero-based index ()
-                    markTask(idx, false);
+                    markTaskIsDone(idx, false);
                 } catch (NumberFormatException e) { // Handle invalid number format
                     printMessageWithBorders("Please provide a valid task number to unmark.");
                 }
@@ -131,7 +140,11 @@ public class Rudeus {
     }
 
     public static void main(String[] args) {
-        printGreetingMessage();
-        readAndProcessUserInput();
+        try {
+            printGreetingMessage();
+            readAndProcessUserInput();
+        } catch (Exception e) {
+            printMessageWithBorders("An unexpected error occurred: " + e.getMessage());
+        }
     }
 }
