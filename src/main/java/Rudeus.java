@@ -2,13 +2,18 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class Rudeus {
-    /** Maximum indent level */
+    /**
+     * Maximum indent level
+     */
     private static final int MAX_INDENT_LEVEL = 4;
-    /** Vector to store tasks dynamically */
+    /**
+     * Vector to store tasks dynamically
+     */
     private static final Vector<Task> taskList = new Vector<>();
 
     /**
      * Automatically prints a message with indents.
+     *
      * @param message The message to print.
      */
     private static void printWithIndents(String message) {
@@ -18,17 +23,19 @@ public class Rudeus {
 
     /**
      * Automatically prints a message with borders.
+     *
      * @param message The message to print.
      */
     private static void printMessageWithBorders(String message) {
         String border = "──────────────────────────────────────────────────────────────────────────";
-            printWithIndents(border);
-            printWithIndents(message);
-            printWithIndents(border);
+        printWithIndents(border);
+        printWithIndents(message);
+        printWithIndents(border);
     }
 
     /**
      * Adds a task to the task list.
+     *
      * @param description The description of the task.
      */
     private static void addTask(String description) {
@@ -59,7 +66,8 @@ public class Rudeus {
     /**
      * Marks or unmarks a task as done.
      * Notifies if the task is already marked/unmarked.
-     * @param index The index of the task.
+     *
+     * @param index  The index of the task.
      * @param isDone True to mark as done, false to unmark.
      */
     private static void markTaskIsDone(int index, boolean isDone) {
@@ -80,7 +88,8 @@ public class Rudeus {
                 printMessageWithBorders("Task is already not marked as done:\n" + extraIndent + taskList.get(index));
             } else {
                 taskList.get(index).setIsDone(false);
-                printMessageWithBorders("OK, I've marked this task as not done yet:\n" + extraIndent + taskList.get(index));
+                printMessageWithBorders("OK, I've marked this task as not done yet:\n" + extraIndent
+                        + taskList.get(index));
             }
         }
     }
@@ -124,17 +133,18 @@ public class Rudeus {
      */
     private static void printGreetingMessage() {
         String logo =
-                "┌──────────────────────────────────────────────────────────────────────┐\n" +
-                        "│░█████████  ░██     ░██ ░███████   ░██████████ ░██     ░██   ░██████  │\n" +
-                        "│░██     ░██ ░██     ░██ ░██   ░██  ░██         ░██     ░██  ░██   ░██ │\n" +
-                        "│░██     ░██ ░██     ░██ ░██    ░██ ░██         ░██     ░██ ░██        │\n" +
-                        "│░█████████  ░██     ░██ ░██    ░██ ░█████████  ░██     ░██  ░████████ │\n" +
-                        "│░██   ░██   ░██     ░██ ░██    ░██ ░██         ░██     ░██         ░██│\n" +
-                        "│░██    ░██   ░██   ░██  ░██   ░██  ░██          ░██   ░██   ░██   ░██ │\n" +
-                        "│░██     ░██   ░██████   ░███████   ░██████████   ░██████     ░██████  │\n" +
-                        "└──────────────────────────────────────────────────────────────────────┘\n";
-        System.out.println("Yo! The name's \n" + logo + "At your service, as always. Need some magic—or maybe just a hand? Ask away!\n" +
-                "──────────────────────────────────────────────────────────────────────────");
+                "┌──────────────────────────────────────────────────────────────────────┐\n"
+                        + "│░█████████  ░██     ░██ ░███████   ░██████████ ░██     ░██   ░██████  │\n"
+                        + "│░██     ░██ ░██     ░██ ░██   ░██  ░██         ░██     ░██  ░██   ░██ │\n"
+                        + "│░██     ░██ ░██     ░██ ░██    ░██ ░██         ░██     ░██ ░██        │\n"
+                        + "│░█████████  ░██     ░██ ░██    ░██ ░█████████  ░██     ░██  ░████████ │\n"
+                        + "│░██   ░██   ░██     ░██ ░██    ░██ ░██         ░██     ░██         ░██│\n"
+                        + "│░██    ░██   ░██   ░██  ░██   ░██  ░██          ░██   ░██   ░██   ░██ │\n"
+                        + "│░██     ░██   ░██████   ░███████   ░██████████   ░██████     ░██████  │\n"
+                        + "└──────────────────────────────────────────────────────────────────────┘\n";
+        System.out.println("Yo! The name's \n" + logo
+                + "At your service, as always. Need some magic—or maybe just a hand? Ask away!\n"
+                + "──────────────────────────────────────────────────────────────────────────");
     }
 
     public static void main(String[] args) {
