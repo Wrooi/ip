@@ -44,38 +44,48 @@ public class CommandManager {
                     break;
                 case MARK:
                     if (args.isEmpty()) {
-                        Ui.printMessageWithBorders("Please provide a task number to mark.");
+                        Ui.printMessageWithBorders("Hold on! You forgot to tell me which task to mark. "
+                                + "Even a genius like me needs a number!");
                         break;
                     }
                     try {
                         int idx = Integer.parseInt(args) - 1;
                         TaskManager.markTaskIsDone(idx, true);
                     } catch (NumberFormatException e) {
-                        Ui.printMessageWithBorders("Please provide a valid task number to mark.");
+                        Ui.printMessageWithBorders("Nice try hehe, that's not a number! "
+                                + "Try again with a proper task number, okay?");
                     }
                     break;
                 case UNMARK:
                     if (args.isEmpty()) {
-                        Ui.printMessageWithBorders("Please provide a task number to unmark.");
+                        Ui.printMessageWithBorders("Which one did you want to unmark again? "
+                                + "Give me a task number please!");
                         break;
                     }
                     try {
                         int idx = Integer.parseInt(args) - 1;
                         TaskManager.markTaskIsDone(idx, false);
                     } catch (NumberFormatException e) {
-                        Ui.printMessageWithBorders("Please provide a valid task number to unmark.");
+                        Ui.printMessageWithBorders("That's not a number, you know? "
+                                + "Even I can't cast my magic on that!");
                     }
                     break;
                 case OTHER:
-                    TaskManager.addTask(userInput);
+                    String[] cmdSplit = userInput.split(" ", 2);
+                    String firstWord = cmdSplit[0].toLowerCase();
+                    if (!firstWord.equals("todo") && !firstWord.equals("deadline") && !firstWord.equals("event")) {
+                        Ui.printMessageWithBorders("Hmm? Never heard of that spell! Try something I know, okay?");
+                    } else {
+                        TaskManager.addTask(userInput);
+                    }
                     break;
                 default:
-                    // Defensive: code should not reach here, but handle gracefully
-                    Ui.printMessageWithBorders("Unknown command. Please try again.");
+                    Ui.printMessageWithBorders("Hmm? Never heard of that spell! Try something I know, okay?");
                     break;
                 }
             } catch (Exception e) {
-                Ui.printMessageWithBorders("An error occurred while processing your command: " + e.getMessage());
+                Ui.printMessageWithBorders("Yikes! Something went wrong: " + e.getMessage()
+                        + "\nEven I mess up sometimes. Try again!");
             }
         }
     }
