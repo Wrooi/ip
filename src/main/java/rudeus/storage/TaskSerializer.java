@@ -1,10 +1,5 @@
 package rudeus.storage;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,53 +7,35 @@ import rudeus.task.Deadline;
 import rudeus.task.Event;
 import rudeus.task.Task;
 import rudeus.task.Todo;
-import rudeus.ui.Ui;
 
-public class Storage {
-    // Use the correct path for both app and test: ip/data/tasks.txt
-    private static final String SAVE_FILE_PATH = "./data/tasks.txt";
-
+public class TaskSerializer {
     /**
-     * Saves the list of tasks to a file.
+     * Serializes a list of tasks into a list of strings for storage.
      *
-     * @param taskList The list of tasks to be saved.
+     * @param taskList The list of tasks to serialize.
+     * @return A list of strings representing the serialized tasks.
      */
-    public static void saveTasksToFile(List<Task> taskList) {
-        // Ensure the data directory exists before saving
-        File dataDir = new File("data");
-        if (!dataDir.exists()) {
-            dataDir.mkdir();
+    public static List<String> serializeTasks(List<Task> taskList) {
+        List<String> lines = new ArrayList<>();
+        for (Task task : taskList) {
+            lines.add(serializeTask(task));
         }
-        try (FileWriter writer = new FileWriter(SAVE_FILE_PATH)) {
-            for (Task task : taskList) {
-                writer.write(serializeTask(task) + System.lineSeparator());
-            }
-        } catch (IOException e) {
-            Ui.printMessageWithBorders("Failed to save tasks: " + e.getMessage());
-        }
+        return lines;
     }
 
     /**
-     * Loads the list of tasks from a file.
+     * Deserializes a list of strings into a list of tasks.
      *
-     * @return The list of tasks loaded from the file.
+     * @param lines The list of strings representing serialized tasks.
+     * @return A list of deserialized Task objects.
      */
-    public static List<Task> loadTasksFromFile() {
+    public static List<Task> deserializeTasks(List<String> lines) {
         List<Task> tasks = new ArrayList<>();
-        File file = new File(SAVE_FILE_PATH);
-        if (!file.exists()) {
-            return tasks;
-        }
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Task task = deserializeTask(line);
-                if (task != null) {
-                    tasks.add(task);
-                }
+        for (String line : lines) {
+            Task task = deserializeTask(line);
+            if (task != null) {
+                tasks.add(task);
             }
-        } catch (IOException e) {
-            Ui.printMessageWithBorders("Failed to load tasks: " + e.getMessage());
         }
         return tasks;
     }
@@ -77,11 +54,9 @@ public class Storage {
         String status = task.getIsDone() ? "1" : "0";
         String desc = task.getDescription();
         if (task instanceof Deadline d) {
-            return String.format("%s | %s | %s | %s", type, status, desc, d.toString()
-                    .replace("[D]" + d, "").trim());
+            return String.format("%s | %s | %s | %s", type, status, desc, d.toString().replace("[D]" + d, "").trim());
         } else if (task instanceof Event e) {
-            return String.format("%s | %s | %s | %s", type, status, desc, e.toString()
-                    .replace("[E]" + e, "").trim());
+            return String.format("%s | %s | %s | %s", type, status, desc, e.toString().replace("[E]" + e, "").trim());
         } else {
             return String.format("%s | %s | %s", type, status, desc);
         }
@@ -135,3 +110,4 @@ public class Storage {
         return event;
     }
 }
+

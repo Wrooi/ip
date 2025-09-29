@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rudeus.command.Parser;
-import rudeus.storage.Storage;
+import rudeus.storage.LocalSave;
+import rudeus.storage.TaskSerializer;
 import rudeus.ui.Ui;
 
 public class TaskManager {
     private static final List<Task> taskList = new ArrayList<>();
+    private static final String SAVE_FILE_PATH = "./data/tasks.txt";
 
     static {
         loadTasksFromFile();
@@ -18,7 +20,8 @@ public class TaskManager {
      * Loads tasks from file at startup.
      */
     public static void loadTasksFromFile() {
-        List<Task> loaded = Storage.loadTasksFromFile();
+        List<String> lines = LocalSave.loadFromFile(SAVE_FILE_PATH);
+        List<Task> loaded = TaskSerializer.deserializeTasks(lines);
         if (!loaded.isEmpty()) {
             taskList.clear();
             taskList.addAll(loaded);
@@ -35,7 +38,7 @@ public class TaskManager {
             Task task = Parser.parseTask(userInput);
             taskList.add(task);
             Ui.printMessageWithBorders("added: " + taskList.get(taskList.size() - 1));
-            Storage.saveTasksToFile(taskList);
+            LocalSave.saveToFile(SAVE_FILE_PATH, TaskSerializer.serializeTasks(taskList));
         } catch (IllegalArgumentException e) {
             Ui.printMessageWithBorders(e.getMessage());
         }
@@ -90,6 +93,6 @@ public class TaskManager {
                         + taskList.get(index));
             }
         }
-        Storage.saveTasksToFile(taskList);
+        LocalSave.saveToFile(SAVE_FILE_PATH, TaskSerializer.serializeTasks(taskList));
     }
 }
