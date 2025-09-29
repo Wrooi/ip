@@ -2,6 +2,8 @@ package rudeus.task;
 
 import java.util.Vector;
 
+import rudeus.command.Parser;
+import rudeus.storage.Storage;
 import rudeus.ui.Ui;
 
 public class TaskManager {
@@ -17,6 +19,7 @@ public class TaskManager {
             Task task = Parser.parseTask(userInput);
             taskList.add(task);
             Ui.printMessageWithBorders("added: " + taskList.lastElement());
+            Storage.saveTasksToFile(taskList);
         } catch (IllegalArgumentException e) {
             Ui.printMessageWithBorders(e.getMessage());
         }
@@ -71,5 +74,6 @@ public class TaskManager {
                         + taskList.get(index));
             }
         }
+        Storage.saveTasksToFile(taskList);
     }
 }
