@@ -30,25 +30,27 @@ public class Parser {
         switch (taskType) {
         case TODO:
             if (args.isEmpty()) {
-                throw new IllegalArgumentException("The description of a todo cannot be empty.");
+                throw new IllegalArgumentException("You want a todo spell, but didn't say which!"
+                        + " Even I can't read minds, you know?");
             }
             return new Todo(args);
         case DEADLINE:
             String[] parts = args.split(" /by ", 2);
             if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
-                throw new IllegalArgumentException("Usage: deadline <desc> /by <date>");
+                throw new IllegalArgumentException("Deadline spell needs both a description "
+                        + "and a /by! Try again, apprentice!");
             }
             return new Deadline(parts[0].trim(), parts[1].trim());
         case EVENT:
             String[] firstSplit = args.split(" /from ", 2);
             if (firstSplit.length < 2) {
-                throw new IllegalArgumentException("Usage: event <desc> /from <start> /to <end>");
+                throw new IllegalArgumentException("Event spell incomplete! Use /from and /to, or the magic fizzles.");
             }
             String desc = firstSplit[0].trim();
             String[] secondSplit = firstSplit[1].split(" /to ", 2);
             if (secondSplit.length < 2 || desc.isEmpty() || secondSplit[0].trim().isEmpty()
                     || secondSplit[1].trim().isEmpty()) {
-                throw new IllegalArgumentException("Usage: event <desc> /from <start> /to <end>");
+                throw new IllegalArgumentException("Event spell incomplete! Use /from and /to, or the magic fizzles.");
             }
             return new Event(desc, secondSplit[0].trim(), secondSplit[1].trim());
         default:
