@@ -43,6 +43,10 @@ public class CommandManager {
                     TaskManager.printTaskList();
                     break;
                 case MARK:
+                    if (args.isEmpty()) {
+                        Ui.printMessageWithBorders("Please provide a task number to mark.");
+                        break;
+                    }
                     try {
                         int idx = Integer.parseInt(args) - 1;
                         TaskManager.markTaskIsDone(idx, true);
@@ -51,6 +55,10 @@ public class CommandManager {
                     }
                     break;
                 case UNMARK:
+                    if (args.isEmpty()) {
+                        Ui.printMessageWithBorders("Please provide a task number to unmark.");
+                        break;
+                    }
                     try {
                         int idx = Integer.parseInt(args) - 1;
                         TaskManager.markTaskIsDone(idx, false);
