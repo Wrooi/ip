@@ -2,6 +2,11 @@ public class Task {
     private String description;
     private boolean isDone;
 
+    /**
+     * Constructs a Task with a description and sets its completion status to false.
+     *
+     * @param description The description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

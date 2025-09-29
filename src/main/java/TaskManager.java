@@ -13,6 +13,9 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Prints the list of tasks with proper indentation.
+     */
     public static void printTaskList() {
         if (taskList.isEmpty()) {
             Ui.printMessageWithBorders("No tasks available.");
