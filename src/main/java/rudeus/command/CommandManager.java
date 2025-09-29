@@ -1,4 +1,9 @@
+package rudeus.command;
+
 import java.util.Scanner;
+
+import rudeus.task.TaskManager;
+import rudeus.ui.Ui;
 
 public class CommandManager {
     private enum CommandType {

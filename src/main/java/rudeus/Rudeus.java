@@ -1,3 +1,8 @@
+package rudeus;
+
+import rudeus.command.CommandManager;
+import rudeus.ui.Ui;
+
 public class Rudeus {
     public static void main(String[] args) {
         try {

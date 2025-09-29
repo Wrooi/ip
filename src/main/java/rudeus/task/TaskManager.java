@@ -1,4 +1,8 @@
+package rudeus.task;
+
 import java.util.Vector;
+
+import rudeus.ui.Ui;
 
 public class TaskManager {
     private static final Vector<Task> taskList = new Vector<>();

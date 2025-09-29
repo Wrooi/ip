@@ -1,3 +1,5 @@
+package rudeus.task;
+
 public class Parser {
     private enum TaskType {
         TODO, DEADLINE, EVENT, OTHER;

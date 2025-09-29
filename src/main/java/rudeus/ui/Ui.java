@@ -1,3 +1,5 @@
+package rudeus.ui;
+
 public class Ui {
     public static final int MAX_INDENT_LEVEL = 4;
 
