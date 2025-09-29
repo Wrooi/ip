@@ -1,13 +1,29 @@
 package rudeus.task;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import rudeus.command.Parser;
 import rudeus.storage.Storage;
 import rudeus.ui.Ui;
 
 public class TaskManager {
-    private static final Vector<Task> taskList = new Vector<>();
+    private static final List<Task> taskList = new ArrayList<>();
+
+    static {
+        loadTasksFromFile();
+    }
+
+    /**
+     * Loads tasks from file at startup.
+     */
+    public static void loadTasksFromFile() {
+        List<Task> loaded = Storage.loadTasksFromFile();
+        if (!loaded.isEmpty()) {
+            taskList.clear();
+            taskList.addAll(loaded);
+        }
+    }
 
     /**
      * Adds a task to the task list after parsing the user input.
@@ -18,7 +34,7 @@ public class TaskManager {
         try {
             Task task = Parser.parseTask(userInput);
             taskList.add(task);
-            Ui.printMessageWithBorders("added: " + taskList.lastElement());
+            Ui.printMessageWithBorders("added: " + taskList.get(taskList.size() - 1));
             Storage.saveTasksToFile(taskList);
         } catch (IllegalArgumentException e) {
             Ui.printMessageWithBorders(e.getMessage());
