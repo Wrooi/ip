@@ -43,4 +43,11 @@ public class Ui {
                 + "At your service, as always. Need some magic—or maybe just a hand? Ask away!\n"
                 + "──────────────────────────────────────────────────────────────────────────");
     }
+
+    /**
+     * Returns a string of spaces for extra indentation (MAX_INDENT_LEVEL + 2).
+     */
+    public static String getExtraIndent() {
+        return " ".repeat(MAX_INDENT_LEVEL + 2);
+    }
 }

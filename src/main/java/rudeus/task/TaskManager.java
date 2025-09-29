@@ -49,7 +49,7 @@ public class TaskManager {
      * @param isDone True to mark as done, false to mark as not done.
      */
     public static void markTaskIsDone(int index, boolean isDone) {
-        String extraIndent = " ".repeat(Ui.MAX_INDENT_LEVEL + 2); // 6 spaces per indent level
+        String extraIndent = Ui.getExtraIndent(); // 6 spaces for extra indentation
         if (index < 0 || index >= taskList.size()) {
             Ui.printMessageWithBorders("Oi! That task number doesn't even exist. Are you trying to trick me?");
             return;
@@ -71,5 +71,21 @@ public class TaskManager {
                         + taskList.get(index));
             }
         }
+    }
+
+    /**
+     * Deletes a task from the task list based on the provided index.
+     *
+     * @param index The index of the task in the task list (0-based).
+     */
+    public static void deleteTask(int index) {
+        String extraIndent = Ui.getExtraIndent();
+        if (index < 0 || index >= taskList.size()) {
+            Ui.printMessageWithBorders("Oi! That task number doesn't even exist. Are you trying to trick me?");
+            return;
+        }
+        Task removedTask = taskList.remove(index);
+        Ui.printMessageWithBorders("Alright, I've erased this task from existence:\n"
+                + extraIndent + removedTask + "\nNow you have " + taskList.size() + " task(s) left in the list.");
     }
 }
