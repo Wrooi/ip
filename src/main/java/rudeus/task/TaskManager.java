@@ -1,11 +1,12 @@
 package rudeus.task;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import rudeus.ui.Ui;
 
 public class TaskManager {
-    private static final Vector<Task> taskList = new Vector<>();
+    private static final List<Task> taskList = new ArrayList<>();
 
     /**
      * Adds a task to the task list after parsing the user input.
@@ -16,7 +17,7 @@ public class TaskManager {
         try {
             Task task = Parser.parseTask(userInput);
             taskList.add(task);
-            Ui.printMessageWithBorders("added: " + taskList.lastElement());
+            Ui.printMessageWithBorders("added: " + taskList.get(taskList.size() - 1));
         } catch (IllegalArgumentException e) {
             Ui.printMessageWithBorders(e.getMessage());
         }

@@ -48,12 +48,16 @@ At your service, as always. Need some magic—or maybe just a hand? Ask away!
     added: [T][ ] borrow book
     ──────────────────────────────────────────────────────────────────────────
     ──────────────────────────────────────────────────────────────────────────
+    OK, I've marked this task as not done yet:
+      [T][ ] borrow library book
+    ──────────────────────────────────────────────────────────────────────────
+    ──────────────────────────────────────────────────────────────────────────
     Nice! I've marked this task as done:
       [T][X] read book
     ──────────────────────────────────────────────────────────────────────────
     ──────────────────────────────────────────────────────────────────────────
     Here are the tasks in your list:
-    1. [T][X] borrow library book
+    1. [T][ ] borrow library book
     2. [D][ ] return library book (by: Sunday)
     3. [E][ ] project meeting (from: Monday 2pm to: 4pm)
     4. [T][X] read book
