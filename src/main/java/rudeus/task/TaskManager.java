@@ -31,7 +31,7 @@ public class TaskManager {
             return;
         }
         StringBuilder taskListMessage = new StringBuilder("Here are the tasks in your list:\n");
-        String indent = " ".repeat(Ui.MAX_INDENT_LEVEL); // 4 spaces per indent level
+        String indent = Ui.getIndent(); // 4 spaces for normal indentation
         for (int i = 0; i < taskList.size(); i++) {
             taskListMessage.append(indent)
                     .append((i + 1))
@@ -79,13 +79,14 @@ public class TaskManager {
      * @param index The index of the task in the task list (0-based).
      */
     public static void deleteTask(int index) {
+        String indent = Ui.getIndent(); // 4 spaces for normal indentation
         String extraIndent = Ui.getExtraIndent();
         if (index < 0 || index >= taskList.size()) {
             Ui.printMessageWithBorders("Oi! That task number doesn't even exist. Are you trying to trick me?");
             return;
         }
         Task removedTask = taskList.remove(index);
-        Ui.printMessageWithBorders("Alright, I've erased this task from existence:\n"
-                + extraIndent + removedTask + "\nNow you have " + taskList.size() + " task(s) left in the list.");
+        Ui.printMessageWithBorders("Alright, I've erased this task from existence:\n" + extraIndent
+                + removedTask + "\n" + indent + "Now you have " + taskList.size() + " task(s) left in the list.");
     }
 }
