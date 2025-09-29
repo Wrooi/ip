@@ -74,5 +74,13 @@ At your service, as always. Need some magic—or maybe just a hand? Ask away!
     Oi! That task number doesn't even exist. Are you trying to trick me?
     ──────────────────────────────────────────────────────────────────────────
     ──────────────────────────────────────────────────────────────────────────
+    Alright, I've erased this task from existence:
+      [E][ ] project meeting (from: Monday 2pm to: 4pm)
+    Now you have 8 task(s) left in the list.
+    ──────────────────────────────────────────────────────────────────────────
+    ──────────────────────────────────────────────────────────────────────────
+    Oi! That task number doesn't even exist. Are you trying to trick me?
+    ──────────────────────────────────────────────────────────────────────────
+    ──────────────────────────────────────────────────────────────────────────
     See you around! Don’t get into too much trouble without me!
     ──────────────────────────────────────────────────────────────────────────

@@ -9,10 +9,13 @@ deadline return book /by June 6th
 todo join sports club
 mark 1
 todo borrow book
+unmark 1
 mark 4
 list
 deadline return book /by Sunday
 deadline do homework /by no idea :-p
 mark 99
 unmark 99
+delete 3
+delete 99
 bye
