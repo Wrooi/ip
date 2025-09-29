@@ -3,10 +3,30 @@ package rudeus.task;
 import java.util.ArrayList;
 import java.util.List;
 
+import rudeus.command.Parser;
+import rudeus.storage.LocalSave;
+import rudeus.storage.TaskSerializer;
 import rudeus.ui.Ui;
 
 public class TaskManager {
     private static final List<Task> taskList = new ArrayList<>();
+    private static final String SAVE_FILE_PATH = "./data/tasks.txt";
+
+    static {
+        loadTasksFromFile();
+    }
+
+    /**
+     * Loads tasks from file at startup.
+     */
+    public static void loadTasksFromFile() {
+        List<String> lines = LocalSave.loadFromFile(SAVE_FILE_PATH);
+        List<Task> loaded = TaskSerializer.deserializeTasks(lines);
+        if (!loaded.isEmpty()) {
+            taskList.clear();
+            taskList.addAll(loaded);
+        }
+    }
 
     /**
      * Adds a task to the task list after parsing the user input.
@@ -18,6 +38,7 @@ public class TaskManager {
             Task task = Parser.parseTask(userInput);
             taskList.add(task);
             Ui.printMessageWithBorders("added: " + taskList.get(taskList.size() - 1));
+            LocalSave.saveToFile(SAVE_FILE_PATH, TaskSerializer.serializeTasks(taskList));
         } catch (IllegalArgumentException e) {
             Ui.printMessageWithBorders(e.getMessage());
         }
@@ -72,6 +93,7 @@ public class TaskManager {
                         + taskList.get(index));
             }
         }
+        LocalSave.saveToFile(SAVE_FILE_PATH, TaskSerializer.serializeTasks(taskList));
     }
 
     /**

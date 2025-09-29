@@ -1,4 +1,9 @@
-package rudeus.task;
+package rudeus.command;
+
+import rudeus.task.Deadline;
+import rudeus.task.Event;
+import rudeus.task.Task;
+import rudeus.task.Todo;
 
 public class Parser {
     private enum TaskType {
