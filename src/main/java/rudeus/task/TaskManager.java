@@ -1,11 +1,12 @@
 package rudeus.task;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import rudeus.ui.Ui;
 
 public class TaskManager {
-    private static final Vector<Task> taskList = new Vector<>();
+    private static final List<Task> taskList = new ArrayList<>();
 
     /**
      * Adds a task to the task list after parsing the user input.
@@ -16,7 +17,7 @@ public class TaskManager {
         try {
             Task task = Parser.parseTask(userInput);
             taskList.add(task);
-            Ui.printMessageWithBorders("added: " + taskList.lastElement());
+            Ui.printMessageWithBorders("added: " + taskList.get(taskList.size() - 1));
         } catch (IllegalArgumentException e) {
             Ui.printMessageWithBorders(e.getMessage());
         }
@@ -31,7 +32,7 @@ public class TaskManager {
             return;
         }
         StringBuilder taskListMessage = new StringBuilder("Here are the tasks in your list:\n");
-        String indent = " ".repeat(Ui.MAX_INDENT_LEVEL); // 4 spaces per indent level
+        String indent = Ui.getIndent(); // 4 spaces for normal indentation
         for (int i = 0; i < taskList.size(); i++) {
             taskListMessage.append(indent)
                     .append((i + 1))
@@ -49,7 +50,7 @@ public class TaskManager {
      * @param isDone True to mark as done, false to mark as not done.
      */
     public static void markTaskIsDone(int index, boolean isDone) {
-        String extraIndent = " ".repeat(Ui.MAX_INDENT_LEVEL + 2); // 6 spaces per indent level
+        String extraIndent = Ui.getExtraIndent(); // 6 spaces for extra indentation
         if (index < 0 || index >= taskList.size()) {
             Ui.printMessageWithBorders("Oi! That task number doesn't even exist. Are you trying to trick me?");
             return;
@@ -71,5 +72,22 @@ public class TaskManager {
                         + taskList.get(index));
             }
         }
+    }
+
+    /**
+     * Deletes a task from the task list based on the provided index.
+     *
+     * @param index The index of the task in the task list (0-based).
+     */
+    public static void deleteTask(int index) {
+        String indent = Ui.getIndent(); // 4 spaces for normal indentation
+        String extraIndent = Ui.getExtraIndent();
+        if (index < 0 || index >= taskList.size()) {
+            Ui.printMessageWithBorders("Oi! That task number doesn't even exist. Are you trying to trick me?");
+            return;
+        }
+        Task removedTask = taskList.remove(index);
+        Ui.printMessageWithBorders("Alright, I've erased this task from existence:\n" + extraIndent
+                + removedTask + "\n" + indent + "Now you have " + taskList.size() + " task(s) left in the list.");
     }
 }

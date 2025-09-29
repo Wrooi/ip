@@ -4,6 +4,20 @@ public class Ui {
     public static final int MAX_INDENT_LEVEL = 4;
 
     /**
+     * Returns a string of spaces for standard indentation (MAX_INDENT_LEVEL).
+     */
+    public static String getIndent() {
+        return " ".repeat(MAX_INDENT_LEVEL);
+    }
+
+    /**
+     * Returns a string of spaces for extra indentation (MAX_INDENT_LEVEL + 2).
+     */
+    public static String getExtraIndent() {
+        return " ".repeat(MAX_INDENT_LEVEL + 2);
+    }
+
+    /**
      * Prints a message with a specified indentation level.
      *
      * @param message The message to be printed.

@@ -7,7 +7,7 @@ import rudeus.ui.Ui;
 
 public class CommandManager {
     private enum CommandType {
-        BYE, LIST, MARK, UNMARK, OTHER;
+        BYE, LIST, MARK, UNMARK, DELETE, OTHER;
 
         public static CommandType fromString(String command) {
             return switch (command) {
@@ -15,6 +15,7 @@ public class CommandManager {
             case "list" -> LIST;
             case "mark" -> MARK;
             case "unmark" -> UNMARK;
+            case "delete" -> DELETE;
             default -> OTHER;
             };
         }
@@ -73,6 +74,19 @@ public class CommandManager {
                     } catch (NumberFormatException e) {
                         Ui.printMessageWithBorders("That's not a number, you know? "
                                 + "Even I can't cast my magic on that!");
+                    }
+                    break;
+                case DELETE:
+                    if (args.isEmpty()) {
+                        Ui.printMessageWithBorders("You want to delete something, but you didn't say which one?"
+                                + " Give me a task number please!");
+                        break;
+                    }
+                    try {
+                        int idx = Integer.parseInt(args) - 1;
+                        TaskManager.deleteTask(idx);
+                    } catch (NumberFormatException e) {
+                        Ui.printMessageWithBorders("That's not a number, you know? Even I can't erase that!");
                     }
                     break;
                 case OTHER:
