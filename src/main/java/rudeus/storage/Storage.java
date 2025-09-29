@@ -15,8 +15,8 @@ import rudeus.task.Todo;
 import rudeus.ui.Ui;
 
 public class Storage {
-    // Update the save file path to the data directory
-    private static final String SAVE_FILE_PATH = "./text-ui-test/tasks.txt";
+    // Use the correct path for both app and test: ip/data/tasks.txt
+    private static final String SAVE_FILE_PATH = "./data/tasks.txt";
 
     /**
      * Saves the list of tasks to a file.
@@ -24,6 +24,11 @@ public class Storage {
      * @param taskList The list of tasks to be saved.
      */
     public static void saveTasksToFile(List<Task> taskList) {
+        // Ensure the data directory exists before saving
+        File dataDir = new File("data");
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+        }
         try (FileWriter writer = new FileWriter(SAVE_FILE_PATH)) {
             for (Task task : taskList) {
                 writer.write(serializeTask(task) + System.lineSeparator());
