@@ -12,6 +12,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
@@ -22,6 +26,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + (isDone ? "X" : " ") + "] " + description;
+        return "[" + (isDone ? "X" : " ") + "] " + getDescription();
     }
 }
