@@ -1,4 +1,21 @@
 public class Parser {
+    private enum TaskType {
+        TODO, DEADLINE, EVENT, OTHER;
+
+        public static TaskType fromString(String command) {
+            switch (command) {
+            case "todo":
+                return TODO;
+            case "deadline":
+                return DEADLINE;
+            case "event":
+                return EVENT;
+            default:
+                return OTHER;
+            }
+        }
+    }
+
     /**
      * Parses user input and returns the corresponding Task.
      *
@@ -12,19 +29,21 @@ public class Parser {
         String command = split[0];
         String args = split.length > 1 ? split[1].trim() : "";
 
-        switch (command) {
-        case "todo":
+        TaskType taskType = TaskType.fromString(command);
+
+        switch (taskType) {
+        case TODO:
             if (args.isEmpty()) {
                 throw new IllegalArgumentException("The description of a todo cannot be empty.");
             }
             return new Todo(args);
-        case "deadline":
+        case DEADLINE:
             String[] parts = args.split(" /by ", 2);
             if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
                 throw new IllegalArgumentException("Usage: deadline <desc> /by <date>");
             }
             return new Deadline(parts[0].trim(), parts[1].trim());
-        case "event":
+        case EVENT:
             String[] firstSplit = args.split(" /from ", 2);
             if (firstSplit.length < 2) {
                 throw new IllegalArgumentException("Usage: event <desc> /from <start> /to <end>");
