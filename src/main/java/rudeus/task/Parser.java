@@ -56,7 +56,7 @@ public class Parser {
             }
             return new Event(desc, secondSplit[0].trim(), secondSplit[1].trim());
         default:
-            return new Task(userInput);
+            throw new IllegalArgumentException("Hmm? That spell doesn't exist. Try a todo, deadline, or event!");
         }
     }
 }

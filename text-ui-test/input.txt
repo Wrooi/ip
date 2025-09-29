@@ -1,3 +1,4 @@
+list
 todo borrow library book
 list
 deadline return library book /by Sunday
@@ -12,4 +13,6 @@ mark 4
 list
 deadline return book /by Sunday
 deadline do homework /by no idea :-p
+mark 99
+unmark 99
 bye
