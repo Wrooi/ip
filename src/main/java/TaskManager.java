@@ -47,7 +47,7 @@ public class TaskManager {
     public static void markTaskIsDone(int index, boolean isDone) {
         String extraIndent = " ".repeat(Ui.MAX_INDENT_LEVEL + 2); // 6 spaces per indent level
         if (index < 0 || index >= taskList.size()) {
-            Ui.printMessageWithBorders("Invalid task number.");
+            Ui.printMessageWithBorders("Oi! That task number doesn't even exist. Are you trying to trick me?");
             return;
         }
         if (isDone) {
