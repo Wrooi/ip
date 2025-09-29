@@ -1,6 +1,6 @@
 public class Event extends Task {
-    private String from;
-    private String to;
+    private final String from;
+    private final String to;
 
     /**
      * Constructs an Event task with a description, start time, and end time.

@@ -3,6 +3,11 @@ import java.util.Vector;
 public class TaskManager {
     private static final Vector<Task> taskList = new Vector<>();
 
+    /**
+     * Adds a task to the task list after parsing the user input.
+     *
+     * @param userInput The user input string containing task details.
+     */
     public static void addTask(String userInput) {
         try {
             Task task = Parser.parseTask(userInput);
@@ -33,6 +38,12 @@ public class TaskManager {
         Ui.printMessageWithBorders(taskListMessage.toString().trim());
     }
 
+    /**
+     * Marks a task as done or not done based on the provided index and status.
+     *
+     * @param index  The index of the task in the task list (0-based).
+     * @param isDone True to mark as done, false to mark as not done.
+     */
     public static void markTaskIsDone(int index, boolean isDone) {
         String extraIndent = " ".repeat(Ui.MAX_INDENT_LEVEL + 2); // 6 spaces per indent level
         if (index < 0 || index >= taskList.size()) {

@@ -3,16 +3,12 @@ public class Parser {
         TODO, DEADLINE, EVENT, OTHER;
 
         public static TaskType fromString(String command) {
-            switch (command) {
-            case "todo":
-                return TODO;
-            case "deadline":
-                return DEADLINE;
-            case "event":
-                return EVENT;
-            default:
-                return OTHER;
-            }
+            return switch (command) {
+            case "todo" -> TODO;
+            case "deadline" -> DEADLINE;
+            case "event" -> EVENT;
+            default -> OTHER;
+            };
         }
     }
 
