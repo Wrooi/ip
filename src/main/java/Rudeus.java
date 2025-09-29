@@ -34,17 +34,50 @@ public class Rudeus {
     }
 
     /**
-     * Adds a task to the task list.
+     * Adds a task based on user input.
      *
-     * @param description The description of the task.
+     * @param userInput The user input string.
      */
-    private static void addTask(String description) {
-        taskList.add(new Task(description));
-        printMessageWithBorders("added: " + description);
+    private static void addTask(String userInput) {
+        try {
+            if (userInput.startsWith("todo ")) {
+                String desc = userInput.substring(5).trim();
+                if (desc.isEmpty()) {
+                    throw new IllegalArgumentException("The description of a todo cannot be empty.");
+                }
+                taskList.add(new Todo(desc));
+                printMessageWithBorders("added: " + taskList.lastElement());
+            } else if (userInput.startsWith("deadline ")) {
+                String[] parts = userInput.substring(9).split(" /by ", 2);
+                if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
+                    throw new IllegalArgumentException("Usage: deadline <desc> /by <date>");
+                }
+                taskList.add(new Deadline(parts[0].trim(), parts[1].trim()));
+                printMessageWithBorders("added: " + taskList.lastElement());
+            } else if (userInput.startsWith("event ")) {
+                String[] firstSplit = userInput.substring(6).split(" /from ", 2);
+                if (firstSplit.length < 2) {
+                    throw new IllegalArgumentException("Usage: event <desc> /from <start> /to <end>");
+                }
+                String desc = firstSplit[0].trim();
+                String[] secondSplit = firstSplit[1].split(" /to ", 2);
+                if (secondSplit.length < 2 || desc.isEmpty() || secondSplit[0].trim().isEmpty()
+                        || secondSplit[1].trim().isEmpty()) {
+                    throw new IllegalArgumentException("Usage: event <desc> /from <start> /to <end>");
+                }
+                taskList.add(new Event(desc, secondSplit[0].trim(), secondSplit[1].trim()));
+                printMessageWithBorders("added: " + taskList.lastElement());
+            } else {
+                taskList.add(new Task(userInput));
+                printMessageWithBorders("added: " + userInput);
+            }
+        } catch (IllegalArgumentException e) {
+            printMessageWithBorders(e.getMessage());
+        }
     }
 
     /**
-     * Prints the task list.
+     * Prints the current task list.
      */
     private static void printTaskList() {
         if (taskList.isEmpty()) {
@@ -64,11 +97,10 @@ public class Rudeus {
     }
 
     /**
-     * Marks or unmarks a task as done.
-     * Notifies if the task is already marked/unmarked.
+     * Marks a task as done or not done.
      *
-     * @param index  The index of the task.
-     * @param isDone True to mark as done, false to unmark.
+     * @param index  The index of the task in the list (0-based).
+     * @param isDone True to mark as done, false to mark as not done.
      */
     private static void markTaskIsDone(int index, boolean isDone) {
         String extraIndent = " ".repeat(MAX_INDENT_LEVEL + 2); // 6 spaces per indent level
@@ -95,7 +127,7 @@ public class Rudeus {
     }
 
     /**
-     * Reads and processes user input.
+     * Reads and processes user input in a loop until "bye" is entered.
      */
     public static void readAndProcessUserInput() {
         Scanner scanner = new Scanner(System.in);
