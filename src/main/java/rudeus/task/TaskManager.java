@@ -9,18 +9,24 @@ import rudeus.storage.TaskSerializer;
 import rudeus.ui.Ui;
 
 public class TaskManager {
-    private static final List<Task> taskList = new ArrayList<>();
-    private static final String SAVE_FILE_PATH = "./data/tasks.txt";
+    private final List<Task> taskList = new ArrayList<>();
+    private final String saveFilePath;
 
-    static {
+    /**
+     * Constructs a TaskManager with the specified file path for saving tasks.
+     *
+     * @param saveFilePath The file path where tasks will be saved and loaded from.
+     */
+    public TaskManager(String saveFilePath) {
+        this.saveFilePath = saveFilePath;
         loadTasksFromFile();
     }
 
     /**
      * Loads tasks from file at startup.
      */
-    public static void loadTasksFromFile() {
-        List<String> lines = LocalSave.loadFromFile(SAVE_FILE_PATH);
+    public void loadTasksFromFile() {
+        List<String> lines = LocalSave.loadFromFile(saveFilePath);
         List<Task> loaded = TaskSerializer.deserializeTasks(lines);
         if (!loaded.isEmpty()) {
             taskList.clear();
@@ -33,12 +39,12 @@ public class TaskManager {
      *
      * @param userInput The user input string containing task details.
      */
-    public static void addTask(String userInput) {
+    public void addTask(String userInput) {
         try {
             Task task = Parser.parseTask(userInput);
             taskList.add(task);
             Ui.printMessageWithBorders("added: " + taskList.get(taskList.size() - 1));
-            LocalSave.saveToFile(SAVE_FILE_PATH, TaskSerializer.serializeTasks(taskList));
+            LocalSave.saveToFile(saveFilePath, TaskSerializer.serializeTasks(taskList));
         } catch (IllegalArgumentException e) {
             Ui.printMessageWithBorders(e.getMessage());
         }
@@ -47,7 +53,7 @@ public class TaskManager {
     /**
      * Prints the list of tasks with proper indentation.
      */
-    public static void printTaskList() {
+    public void printTaskList() {
         if (taskList.isEmpty()) {
             Ui.printMessageWithBorders("No tasks available.");
             return;
@@ -70,7 +76,7 @@ public class TaskManager {
      * @param index  The index of the task in the task list (0-based).
      * @param isDone True to mark as done, false to mark as not done.
      */
-    public static void markTaskIsDone(int index, boolean isDone) {
+    public void markTaskIsDone(int index, boolean isDone) {
         String extraIndent = Ui.getExtraIndent(); // 6 spaces for extra indentation
         if (index < 0 || index >= taskList.size()) {
             Ui.printMessageWithBorders("Oi! That task number doesn't even exist. Are you trying to trick me?");
@@ -93,7 +99,7 @@ public class TaskManager {
                         + taskList.get(index));
             }
         }
-        LocalSave.saveToFile(SAVE_FILE_PATH, TaskSerializer.serializeTasks(taskList));
+        LocalSave.saveToFile(saveFilePath, TaskSerializer.serializeTasks(taskList));
     }
 
     /**
@@ -101,7 +107,7 @@ public class TaskManager {
      *
      * @param index The index of the task in the task list (0-based).
      */
-    public static void deleteTask(int index) {
+    public void deleteTask(int index) {
         String indent = Ui.getIndent(); // 4 spaces for normal indentation
         String extraIndent = Ui.getExtraIndent();
         if (index < 0 || index >= taskList.size()) {
@@ -111,5 +117,6 @@ public class TaskManager {
         Task removedTask = taskList.remove(index);
         Ui.printMessageWithBorders("Alright, I've erased this task from existence:\n" + extraIndent
                 + removedTask + "\n" + indent + "Now you have " + taskList.size() + " task(s) left in the list.");
+        LocalSave.saveToFile(saveFilePath, TaskSerializer.serializeTasks(taskList));
     }
 }

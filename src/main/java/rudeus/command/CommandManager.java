@@ -6,26 +6,17 @@ import rudeus.task.TaskManager;
 import rudeus.ui.Ui;
 
 public class CommandManager {
-    private enum CommandType {
-        BYE, LIST, MARK, UNMARK, DELETE, OTHER;
+    private final TaskManager taskManager;
 
-        public static CommandType fromString(String command) {
-            return switch (command) {
-            case "bye" -> BYE;
-            case "list" -> LIST;
-            case "mark" -> MARK;
-            case "unmark" -> UNMARK;
-            case "delete" -> DELETE;
-            default -> OTHER;
-            };
-        }
+    public CommandManager(TaskManager taskManager) {
+        this.taskManager = taskManager;
     }
 
     /**
      * Reads and processes user input commands in a loop until the "bye" command is
      * received.
      */
-    public static void readAndProcessUserInput() {
+    public void readAndProcessUserInput() {
         Scanner scanner = new Scanner(System.in);
         String userInput;
         while (true) {
@@ -46,7 +37,7 @@ public class CommandManager {
                     scanner.close();
                     return;
                 case LIST:
-                    TaskManager.printTaskList();
+                    taskManager.printTaskList();
                     break;
                 case MARK:
                     if (args.isEmpty()) {
@@ -56,7 +47,7 @@ public class CommandManager {
                     }
                     try {
                         int idx = Integer.parseInt(args) - 1;
-                        TaskManager.markTaskIsDone(idx, true);
+                        taskManager.markTaskIsDone(idx, true);
                     } catch (NumberFormatException e) {
                         Ui.printMessageWithBorders("Nice try hehe, that's not a number! "
                                 + "Try again with a proper task number, okay?");
@@ -70,7 +61,7 @@ public class CommandManager {
                     }
                     try {
                         int idx = Integer.parseInt(args) - 1;
-                        TaskManager.markTaskIsDone(idx, false);
+                        taskManager.markTaskIsDone(idx, false);
                     } catch (NumberFormatException e) {
                         Ui.printMessageWithBorders("That's not a number, you know? "
                                 + "Even I can't cast my magic on that!");
@@ -84,7 +75,7 @@ public class CommandManager {
                     }
                     try {
                         int idx = Integer.parseInt(args) - 1;
-                        TaskManager.deleteTask(idx);
+                        taskManager.deleteTask(idx);
                     } catch (NumberFormatException e) {
                         Ui.printMessageWithBorders("That's not a number, you know? Even I can't erase that!");
                     }
@@ -95,7 +86,7 @@ public class CommandManager {
                     if (!firstWord.equals("todo") && !firstWord.equals("deadline") && !firstWord.equals("event")) {
                         Ui.printMessageWithBorders("Hmm? Never heard of that spell! Try something I know, okay?");
                     } else {
-                        TaskManager.addTask(userInput);
+                        taskManager.addTask(userInput);
                     }
                     break;
                 default:
@@ -106,6 +97,21 @@ public class CommandManager {
                 Ui.printMessageWithBorders("Yikes! Something went wrong: " + e.getMessage()
                         + "\nEven I mess up sometimes. Try again!");
             }
+        }
+    }
+
+    private enum CommandType {
+        BYE, LIST, MARK, UNMARK, DELETE, OTHER;
+
+        public static CommandType fromString(String command) {
+            return switch (command) {
+            case "bye" -> BYE;
+            case "list" -> LIST;
+            case "mark" -> MARK;
+            case "unmark" -> UNMARK;
+            case "delete" -> DELETE;
+            default -> OTHER;
+            };
         }
     }
 }
