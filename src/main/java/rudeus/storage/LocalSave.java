@@ -10,6 +10,9 @@ import java.util.List;
 
 import rudeus.ui.Ui;
 
+/**
+ * Handles saving and loading tasks to and from a local file.
+ */
 public class LocalSave {
     /**
      * Saves the list of tasks to a file.

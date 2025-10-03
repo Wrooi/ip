@@ -1,10 +1,15 @@
 package rudeus.ui;
 
+/**
+ * Handles all user interface interactions and formatting.
+ */
 public class Ui {
     public static final int MAX_INDENT_LEVEL = 4;
 
     /**
      * Returns a string of spaces for standard indentation (MAX_INDENT_LEVEL).
+     *
+     * @return Indentation string.
      */
     public static String getIndent() {
         return " ".repeat(MAX_INDENT_LEVEL);
@@ -12,6 +17,8 @@ public class Ui {
 
     /**
      * Returns a string of spaces for extra indentation (MAX_INDENT_LEVEL + 2).
+     *
+     * @return Extra indentation string.
      */
     public static String getExtraIndent() {
         return " ".repeat(MAX_INDENT_LEVEL + 2);
@@ -33,7 +40,7 @@ public class Ui {
      * @param message The message to be printed.
      */
     public static void printMessageWithBorders(String message) {
-        String border = "──────────────────────────────────────────────────────────────────────────";
+        String border = "──────────────────────────────────────────────────���───────────────────────";
         printWithIndents(border);
         printWithIndents(message);
         printWithIndents(border);
@@ -45,7 +52,7 @@ public class Ui {
     public static void printGreetingMessage() {
         String logo =
                 " ──────────────────────────────────────────────────────────────────────\n"
-                        + "│░█████████  ░██     ░██ ░███████   ░██████████ ░██     ░██   ░██████  │\n"
+                        + "│░█████████  ░██     ░██ ░███████   ░���█████████ ░██     ░██   ░██████  │\n"
                         + "│░██     ░██ ░██     ░██ ░██   ░██  ░██         ░██     ░██  ░██   ░██ │\n"
                         + "│░██     ░██ ░██     ░██ ░██    ░██ ░██         ░██     ░██ ░██        │\n"
                         + "│░█████████  ░██     ░██ ░██    ░██ ░█████████  ░██     ░██  ░████████ │\n"

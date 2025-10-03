@@ -8,6 +8,9 @@ import rudeus.storage.LocalSave;
 import rudeus.storage.TaskSerializer;
 import rudeus.ui.Ui;
 
+/**
+ * Manages the list of tasks and provides operations to manipulate them.
+ */
 public class TaskManager {
     private final List<Task> taskList = new ArrayList<>();
     private final String saveFilePath;
