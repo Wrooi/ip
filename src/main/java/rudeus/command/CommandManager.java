@@ -5,9 +5,17 @@ import java.util.Scanner;
 import rudeus.task.TaskManager;
 import rudeus.ui.Ui;
 
+/**
+ * Handles parsing and execution of user commands.
+ */
 public class CommandManager {
     private final TaskManager taskManager;
 
+    /**
+     * Constructs a CommandManager with the given TaskManager.
+     *
+     * @param taskManager The TaskManager to operate on.
+     */
     public CommandManager(TaskManager taskManager) {
         this.taskManager = taskManager;
     }

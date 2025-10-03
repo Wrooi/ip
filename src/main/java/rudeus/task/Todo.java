@@ -1,5 +1,8 @@
 package rudeus.task;
 
+/**
+ * Represents a simple todo task.
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);

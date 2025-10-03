@@ -8,6 +8,9 @@ import rudeus.task.Event;
 import rudeus.task.Task;
 import rudeus.task.Todo;
 
+/**
+ * Utility class for serializing and deserializing tasks to and from strings for storage.
+ */
 public class TaskSerializer {
     /**
      * Serializes a list of tasks into a list of strings for storage.

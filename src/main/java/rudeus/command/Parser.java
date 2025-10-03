@@ -5,6 +5,9 @@ import rudeus.task.Event;
 import rudeus.task.Task;
 import rudeus.task.Todo;
 
+/**
+ * Parses user input to create Task objects.
+ */
 public class Parser {
     private enum TaskType {
         TODO, DEADLINE, EVENT, OTHER;
