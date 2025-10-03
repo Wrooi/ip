@@ -80,6 +80,14 @@ public class CommandManager {
                         Ui.printMessageWithBorders("That's not a number, you know? Even I can't erase that!");
                     }
                     break;
+                case FIND:
+                    if (args.isEmpty()) {
+                        Ui.printMessageWithBorders("You want to search for something, "
+                                + "but didn't say what! Give me a keyword.");
+                        break;
+                    }
+                    taskManager.findTasks(args);
+                    break;
                 case OTHER:
                     String[] cmdSplit = userInput.split(" ", 2);
                     String firstWord = cmdSplit[0].toLowerCase();
@@ -101,7 +109,7 @@ public class CommandManager {
     }
 
     private enum CommandType {
-        BYE, LIST, MARK, UNMARK, DELETE, OTHER;
+        BYE, LIST, MARK, UNMARK, DELETE, FIND, OTHER;
 
         public static CommandType fromString(String command) {
             return switch (command) {
@@ -110,6 +118,7 @@ public class CommandManager {
             case "mark" -> MARK;
             case "unmark" -> UNMARK;
             case "delete" -> DELETE;
+            case "find" -> FIND;
             default -> OTHER;
             };
         }
