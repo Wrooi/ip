@@ -14,6 +14,7 @@ mark 4
 list
 deadline return book /by Sunday
 deadline do homework /by no idea :-p
+find book
 mark 99
 unmark 99
 delete 3

@@ -1,6 +1,5 @@
-T | 1 | borrow library book
+T | 0 | borrow library book
 D | 0 | return library book | [D][ ] return library book (by: Sunday)
-E | 0 | project meeting | [E][ ] project meeting (from: Monday 2pm to: 4pm)
 T | 1 | read book
 D | 0 | return book | [D][ ] return book (by: June 6th)
 T | 0 | join sports club
