@@ -40,7 +40,7 @@ public class Ui {
      * @param message The message to be printed.
      */
     public static void printMessageWithBorders(String message) {
-        String border = "──────────────────────────────────────────────────���───────────────────────";
+        String border = "─────────────────────────────────────────────────────────────────────────";
         printWithIndents(border);
         printWithIndents(message);
         printWithIndents(border);
@@ -52,7 +52,7 @@ public class Ui {
     public static void printGreetingMessage() {
         String logo =
                 " ──────────────────────────────────────────────────────────────────────\n"
-                        + "│░█████████  ░██     ░██ ░███████   ░���█████████ ░██     ░██   ░██████  │\n"
+                        + "│░█████████  ░██     ░██ ░███████   ░█████████  ░██     ░██   ░██████  │\n"
                         + "│░██     ░██ ░██     ░██ ░██   ░██  ░██         ░██     ░██  ░██   ░██ │\n"
                         + "│░██     ░██ ░██     ░██ ░██    ░██ ░██         ░██     ░██ ░██        │\n"
                         + "│░█████████  ░██     ░██ ░██    ░██ ░█████████  ░██     ░██  ░████████ │\n"
