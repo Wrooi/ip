@@ -45,6 +45,7 @@ Example:
 todo Finish CS assignment
 
 Expected Output:
+
 ────────────────────────────────────────────────────────────
 
 added: [T][ ] Finish CS assignment
@@ -62,6 +63,7 @@ Example:
 deadline Submit report /by Friday
 
 Expected Output:
+
 ────────────────────────────────────────────────────────────
 
 added: [D][ ] Submit report (by: Friday)
@@ -79,6 +81,7 @@ Example:
 event Project meeting /from Monday 2pm /to Monday 4pm
 
 Expected Output:
+
 ────────────────────────────────────────────────────────────
 
 added: [E][ ] Project meeting (from: Monday 2pm to: Monday 4pm)
@@ -93,6 +96,7 @@ Usage:
 list
 
 Expected Output:
+
 ────────────────────────────────────────────────────────────
 
 Here are the tasks in your list:
@@ -115,6 +119,7 @@ Example:
 mark 2
 
 Expected Output:
+
 ────────────────────────────────────────────────────────────
 
 Nice! I've marked this task as done:
@@ -134,6 +139,7 @@ Example:
 delete 1
 
 Expected Output:
+
 ────────────────────────────────────────────────────────────
 
 Alright, I've erased this task from existence:
@@ -155,6 +161,7 @@ Example:
 find report
 
 Expected Output:
+
 ────────────────────────────────────────────────────────────
 
 Here are the matching tasks in your list:
@@ -171,6 +178,7 @@ Usage:
 bye
 
 Expected Output:
+
 ────────────────────────────────────────────────────────────
 
 See you around! Don’t get into too much trouble without me!
