@@ -72,6 +72,15 @@ At your service, as always. Need some magic—or maybe just a hand? Ask away!
     added: [D][ ] do homework (by: no idea :-p)
     ──────────────────────────────────────────────────────────────────────────
     ──────────────────────────────────────────────────────────────────────────
+    Here are the matching tasks in your list:
+    1. [T][ ] borrow library book
+    2. [D][ ] return library book (by: Sunday)
+    3. [T][X] read book
+    4. [D][ ] return book (by: June 6th)
+    5. [T][ ] borrow book
+    6. [D][ ] return book (by: Sunday)
+    ──────────────────────────────────────────────────────────────────────────
+    ──────────────────────────────────────────────────────────────────────────
     Oi! That task number doesn't even exist. Are you trying to trick me?
     ──────────────────────────────────────────────────────────────────────────
     ──────────────────────────────────────────────────────────────────────────
